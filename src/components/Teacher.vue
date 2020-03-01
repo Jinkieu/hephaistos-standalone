@@ -54,6 +54,17 @@
         </div>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="12" sm="6" md="3">
+        <v-textarea
+          v-model="testResult"
+          solo
+          name="testResult"
+          label="test Result"
+          required
+        ></v-textarea>
+      </v-col>
+    </v-row>
     <div align="center">
       <v-col cols="12" sm="6" md="3">
         <v-btn block color="secondary" dark @click="create()">Create</v-btn>
@@ -80,7 +91,8 @@ export default {
     difficulty: 0,
     score: 0,
     creation_date: new Date(),
-    editor: null
+    editor: null,
+    testResult: ''
   }),
 
   methods: {
@@ -99,9 +111,10 @@ export default {
       const { lang, editor, tests } = this
       const solution = editor.getValue()
       try {
-        await this.axios.post('http://localhost:3000/api/v1/exercise/sandbox', {
+        const result = await this.axios.post('http://localhost:3000/api/v1/exercise/sandbox', {
           lang, tests, solution
         })
+        this.testResult = JSON.stringify(result.data)
       } catch (err) {
         console.log(err)
       }
