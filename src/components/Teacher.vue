@@ -49,6 +49,9 @@
         <div id="editor" class="exercise-editor-ace-editor" style="position: relative; height: 20rem">
           <v-btn block color="secondary" dark @click="mounted()">Open Editor</v-btn>
         </div>
+        <div>
+          <v-btn block color="secondary" dark @click="sandbox()">Run sandbox Code</v-btn>
+        </div>
       </v-col>
     </v-row>
     <div align="center">
@@ -92,7 +95,17 @@ export default {
         console.log(err)
       }
     },
-
+    async sandbox () {
+      const { lang, editor, tests } = this
+      const solution = editor.getValue()
+      try {
+        await this.axios.post('http://localhost:3000/api/v1/exercise/sandbox', {
+          lang, tests, solution
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    },
     mounted () {
       this.editor = ace.edit('editor')
       this.editor.setTheme('ace/theme/monokai')
