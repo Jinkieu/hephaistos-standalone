@@ -1,6 +1,6 @@
 import Home from '../components/Home.vue'
 import Login from '../components/Login.vue'
-import Register from '../components/Register.vue'
+import Teacher from '../components/Teacher.vue'
 import axios from 'axios'
 import VueRouter from 'vue-router'
 import Vue from 'vue'
@@ -21,7 +21,7 @@ function createRouter (state) {
 
   const routes = [
     { path: '/', name: 'home', component: Home, beforeEnter },
-    { path: '/register', name: 'register', component: Register },
+    { path: '/teacher', name: 'teacher', component: Teacher, beforeEnter },
     { path: '/login', name: 'login', component: Login }
   ]
   return new VueRouter({
