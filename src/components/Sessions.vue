@@ -2,28 +2,24 @@
   <v-container>
     <v-row>
       <draggable tag="div" v-model="modulesDatas" :animation="200" ghost-class="moving-card">
-        <v-col v-for="session in modulesDatas" :key="session.id">
-          <v-row>
-              <v-col>
-                  <v-card class="mx-auto" width="250" height="100" outlined color="#d4af37">
-                    <v-row>
-                      <v-row>
-                        <v-card-title color="grey">
-                          {{ session.name }}
-                        </v-card-title>
-                      </v-row>
-                      <v-row>
-                        <v-col>
-                        {{ getNumberExercises(session.id) }}
-                        <v-icon medium color="white darken-2">mdi-gavel</v-icon>
-                        <v-icon medium color="white darken-2">mdi-pen</v-icon>
-                        </v-col>
-                      </v-row>
-                    </v-row>
-                  </v-card>
-              </v-col>
-          </v-row>
-        </v-col>
+        <v-row>
+          <div v-for="session in modulesDatas" :key="session.id">
+              <v-card class="mx-auto" width="250" height="100" outlined color="#d4af37">
+                <v-row>
+                    <v-card-title color="grey">
+                      {{ session.name }}
+                    </v-card-title>
+                  <v-row>
+                    <v-col>
+                    {{ getNumberExercises(session.id) }}
+                    <v-icon medium color="white darken-2">mdi-gavel</v-icon>
+                    <v-icon medium color="white darken-2">mdi-pen</v-icon>
+                    </v-col>
+                  </v-row>
+                </v-row>
+              </v-card>
+          </div>
+        </v-row>
       </draggable>
     </v-row>
   </v-container>

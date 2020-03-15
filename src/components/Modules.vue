@@ -8,7 +8,7 @@
         </v-toolbar-title>
       </v-toolbar>
          <v-col v-for="module in this.modules" :key="module.id">
-                <h2><router-link :to="{ name: 'module', params: { moduleId: module.id } }">{{ module.name }}</router-link></h2>
+            <h2><router-link :to="{ name: 'module', params: { moduleId: module.id } }">{{ module.name }}</router-link></h2>
             <Sessions :moduleId="module.id"/>
         </v-col>
     </v-card>
