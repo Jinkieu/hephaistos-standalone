@@ -7,11 +7,6 @@ import Module from '../components/Module.vue'
 import Exercises from '../components/Exercises.vue'
 
 Vue.use(VueRouter)
-/*
-  beforeEnter 'Pare feu' pour se poser la question de si on a le droit d'afficher telle ou telle page.
-  On le plug à tous les routes qui ont besoin de savoir si c'est auth.
-  fetchUser qui rempli vuex afin de re verifier
-*/
 async function beforeEnter (_to, _from, next) {
   if (!store.getters['user/isAuthenticated']) {
     await store.dispatch('user/fetchUser')

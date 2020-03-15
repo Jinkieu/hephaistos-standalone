@@ -65,10 +65,7 @@ export default {
     ...mapGetters('sessions', ['getSessionById'])
   },
   async mounted () {
-    // Fetch our session
     await this.fetchSession({ id: this.sessionId })
-
-    // Fetch the exercises of each session
     await Promise.all(
       this.sessions.map(s => this.fetchExercisesForSession({ sessionId: s.id }))
     )
