@@ -1,10 +1,5 @@
 <template>
   <v-container>
-
-<!-- La vue étudiante, url dans quel on est session/3/exercise/15 -->
-<!-- Les composants ne sont pas re-rendus lorsqu'on change d'exercise. Mais il faut juste changer les parametres
-Le composant 'principale recoit exercise_id et sssion_id. utiliser watch pour déclencher la mise à jour -->
-<!-- watch:  -->
   <v-card class="mx-auto" max-width="500" color="#1e1e1e" tile>
     <v-list shaped>
       <v-subheader>Session's exercises</v-subheader>
@@ -46,10 +41,7 @@ export default {
     ...mapGetters('sessions', ['getSessionById'])
   },
   async mounted () {
-    // Fetch our session
     await this.fetchSession({ id: this.sessionId })
-
-    // Fetch the exercises of each session
     await Promise.all(
       this.sessions.map(s => this.fetchExercisesForSession({ sessionId: s.id }))
     )

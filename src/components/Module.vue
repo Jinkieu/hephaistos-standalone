@@ -56,7 +56,6 @@ export default {
       return parseInt(this.$route.params.moduleId)
     },
     module () {
-      // Si this.getModuleById(this.moduleId) est undefined, retourner l'bojet name avec comme valeur loading
       return this.getModuleById(this.moduleId) || { name: 'Loading ... ' }
     },
     sessions () {
@@ -69,15 +68,10 @@ export default {
     ...mapGetters('exercises', ['getExercisesBySessionId'])
   },
   async mounted () {
-    // Fetch the module with our Id
     await this.fetchModule({ id: this.moduleId })
-
-    // Fetch the sessions of the module (TP1, TP2, TP3, TP4, TP5)
     await Promise.all(
       this.modules.map(m => this.fetchSessionsForModule({ moduleId: m.id }))
     )
-
-    // Fetch the exercises of each session
     await Promise.all(
       this.sessions.map(s => this.fetchExercisesForSession({ sessionId: s.id }))
     )

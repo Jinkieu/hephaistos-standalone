@@ -65,7 +65,6 @@ export default {
     ...mapGetters('exercises', ['getExercisesBySessionId'])
   },
   async mounted () {
-    // Lance toutes les requêtes
     await Promise.all(
       this.modules.map(m => this.fetchSessionsForModule({ moduleId: m.id }))
     )

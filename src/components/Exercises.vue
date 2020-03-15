@@ -28,7 +28,6 @@ export default {
   name: 'exercises',
   watch: {
     exerciseIdSelected: async function () {
-      console.log('(In exercises.vue): Request the exercise ' + this.exerciseIdSelected + ' from session ' + this.sessionId)
       this.$router.push({ name: 'exercises', params: { sessionId: this.sessionId, exerciseId: this.exerciseIdSelected } })
     }
   },
@@ -81,7 +80,6 @@ export default {
     ...mapActions('exercises', ['fetchExerciseForSession']),
     ...mapActions('sessions', ['fetchSession']),
     onExerciseSelected (id) {
-      console.log('ID PASSED TO PARENT: ' + id)
       this.exerciseIdSelected = id
     },
     signOut () {
