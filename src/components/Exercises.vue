@@ -1,10 +1,5 @@
 <template>
   <v-container>
-
-<!-- La vue étudiante, url dans quel on est session/3/exercise/15 -->
-<!-- Les composants ne sont pas re-rendus lorsqu'on change d'exercise. Mais il faut juste changer les parametres
-Le composant 'principale recoit exercise_id et session_id. utiliser watch pour déclencher la mise à jour -->
-<!-- watch:  -->
     <v-card>
       <v-toolbar flat color="#1e1e1e" dark>
         <v-toolbar-title>
@@ -12,7 +7,6 @@ Le composant 'principale recoit exercise_id et session_id. utiliser watch pour d
           <v-btn text @click="signOut">Logout</v-btn>
         </v-toolbar-title>
       </v-toolbar>
-      <!-- Col with exercisesList left and DoWork Right -->
       <v-row>
         <v-col cols="12" sm="2" md="2">
           <ExercisesList @exerciseSelected="onExerciseSelected"/>
