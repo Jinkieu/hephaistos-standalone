@@ -7,7 +7,7 @@
           md="4"
         >
           <v-text-field
-            v-model="username"
+            v-model="email"
             :rules="emailRules"
             :counter="10"
             label="Email"
@@ -33,7 +33,7 @@
           cols="12"
           md="8"
         >
-          <v-btn block color="secondary" dark @click="login">Login</v-btn>
+          <v-btn block color="secondary" dark @click="signIn">Login</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -41,10 +41,12 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
+
 export default {
   data: () => ({
-    valid: false,
-    username: '',
+    valid: '',
+    email: '',
     password: '',
     passwordRules: [
       v => !!v || 'Password is required',
@@ -55,18 +57,19 @@ export default {
       v => /.+@.+/.test(v) || 'E-mail must be valid'
     ]
   }),
+  computed: {
+    ...mapState({ }),
+    ...mapGetters('user', ['isAuthenticated'])
+  },
+
   methods: {
-    async login () {
-      const { username, password } = this
+    ...mapActions('user', ['login']),
+    async signIn () {
       try {
-        const result = await this.axios.post('http://localhost:3000/api/v1/login', {
-          username,
-          password
-        })
-        this.user = result.data
-        this.loggedIn = true
+        await this.login({ email: this.email, password: this.password })
+        this.$router.push({ name: 'modules' })
       } catch (err) {
-        this.errorLogin = err
+        console.log('Ca marche pas')
       }
     }
   }

@@ -1,23 +1,29 @@
 import Vue from 'vue'
 import App from './App.vue'
+import router from './router'
 import vuetify from './plugins/vuetify'
-import VueAxios from 'vue-axios'
 import axios from 'axios'
-import createRouter from './router/routes'
+import VueAxios from 'vue-axios'
+import store from './store/index'
+import VueDraggable from 'vuedraggable'
 
-axios.defaults.withCredentials = true // this line here !
+Vue.use(VueAxios, axios, VueDraggable)
 
+axios.defaults.withCredentials = true // this line here ! Axios envoie les cookies à votre server
 Vue.config.productionTip = false
 
-Vue.use(VueAxios, axios)
-
-const state = {
-  user: {}
+var filter = function (text, length, clamp) {
+  clamp = clamp || '...'
+  var node = document.createElement('div')
+  node.innerHTML = text
+  var content = node.textContent
+  return content.length > length ? content.slice(0, length) + clamp : content
 }
+Vue.filter('truncate', filter)
 
 new Vue({
-  data: state,
-  router: createRouter(state),
+  store,
+  router,
   vuetify,
   render: h => h(App)
 }).$mount('#app')
